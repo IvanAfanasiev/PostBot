@@ -14,7 +14,7 @@ Postbit is a Telegram bot created to automatically post content.
 
 <b>Usage:</b><br>
 To use the bot, you need to log in to <b>Telegram</b> and create your own bot using 
-<button id="copy_btn" onclick="copy_ID('@BotFather')"><b><u>@BotFather</u></b>.</button>
+<b><u>@BotFather</u></b>.
 <br>
 Insert the token of the created bot into the value <b>main.py -> API_TOKEN</b>.<br><br>
 It is also necessary to create 2 channels:<br>
@@ -25,10 +25,10 @@ To specify the delay of posts, you must specify a value for handlers.py -> POST_
 
 
 Now you should log into your bot and write the 
-<button id="copy_btn" onclick="copy_ID('/start')"><b><u>/start</u></b>.</button> command.<br>
+<b><u>/start</u></b>. command.<br>
 The bot will greet you and ask you to enter your password.<br>
 The default password is 
-<button id="copy_btn" onclick="copy_ID('Password')"><b><u>"Password"</u></b>.</button>
+<b><u>"Password"</u></b>.
 , but it can be changed by changing the variable <b>handlers.py -> ADMIN_PASSWORD</b>.<br><br>
 
 After the correct password is entered, the bot will inform you about it and offer 4 options:
@@ -38,16 +38,3 @@ After the correct password is entered, the bot will inform you about it and offe
     <li>Start posting - Start making posts with the specified delay.</li>
     <li>Stop posting - Stop making posts with the specified delay</li>
 </ul>
-
-
-<script>
-    function copy_ID(txt) {
-        var inp = document.createElement('input')
-        inp.value = txt;
-        document.body.appendChild(inp);
-        inp.select();
-        document.execCommand("copy");
-        alert("Copied the text: " + inp.value);
-        document.body.removeChild(inp)
-    }
-</script>
