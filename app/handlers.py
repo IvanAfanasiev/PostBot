@@ -16,6 +16,8 @@ TARGET_CHANNEL_ID = '@example_target_id'
 SOURCE_CHANNEL_ID = '@example_source_id'
 ADMIN_PASSWORD = 'Password'
 
+POST_DELAY = 120 * 60 # in seconds
+
 last_message_indx = 0
 wait = True
 
@@ -43,34 +45,33 @@ async def stop_posting(callback: CallbackQuery):
 async def start_posting(callback: CallbackQuery):
     global last_message_indx
     # to avoid circular import
-    from main import check_time, bot
+    from main import bot
     can_send = False
     last_indx = 0
     global wait
     await callback.answer('work started (=')
     while wait:
         can_send = False
+        if wait == True:
+            while can_send == False:
+                last_message_indx+=1
+                try:
+                    await bot.copy_message(TARGET_CHANNEL_ID, SOURCE_CHANNEL_ID, last_message_indx)
+                    last_indx = last_message_indx
+                    await callback.message.answer("posted {indx}".format(indx=last_message_indx))
+                    # delete the message in the source channel if it necessary
+                    # await bot.delete_message(SOURCE_CHANNEL_ID, i)
+                    # await message.answer("deleted {indx}".format(indx=i))
+                    can_send = True
+                except:
+                    # if next 100 iterations return empty
+                    if ((last_message_indx - last_indx)>100):
+                        await callback.message.answer("The posts are over")
+                        wait = False
+                        break 
+                    continue 
         # send message every 2 hours
-        if check_time() == True:
-            if wait == True:
-                while can_send == False:
-                    last_message_indx+=1
-                    try:
-                        await bot.copy_message(TARGET_CHANNEL_ID, SOURCE_CHANNEL_ID, last_message_indx)
-                        last_indx = last_message_indx
-                        await callback.message.answer("posted {indx}".format(indx=last_message_indx))
-                        # delete the message in the source channel if it necessary
-                        # await bot.delete_message(SOURCE_CHANNEL_ID, i)
-                        # await message.answer("deleted {indx}".format(indx=i))
-                        can_send = True
-                    except:
-                        # if next 100 iterations return empty
-                        if ((last_message_indx - last_indx)>100):
-                            await callback.message.answer("The posts are over")
-                            wait = False
-                            break 
-                        continue 
-        await asyncio.sleep(10)# * 60)
+        await asyncio.sleep(POST_DELAY)
 
 
 # F.data looks at the callback from the buttons in the bot message
