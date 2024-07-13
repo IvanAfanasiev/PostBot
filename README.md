@@ -1,12 +1,3 @@
-<style>
-    #copy_btn{
-        font-family: "Times New Roman", Georgia, Serif;
-        font-size: 18px;
-        cursor: pointer;
-        background-color: transparent;
-        border: none;
-    }
-</style>
 <h1 align="center">POST BOT</h1>
 Postbit is a Telegram bot created to automatically post content.
 <br>
