@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 
+
+
+<body>
+
 <style>
     #copy_btn{
         font-family: "Times New Roman", Georgia, Serif;
@@ -16,9 +20,7 @@
     }
 </style>
 
-
-<body>
-        <h1 align="center">POST BOT</h1>
+    <h1 align="center">POST BOT</h1>
     Postbit is a Telegram bot created to automatically post content.
     <br>
     <br>
